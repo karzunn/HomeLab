@@ -20,6 +20,9 @@ spec:
       containers:
         - name: jenkins
           image: jenkins/jenkins:lts
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
           resources:
             requests:
               memory: "11Gi"
