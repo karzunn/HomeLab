@@ -20,6 +20,11 @@ spec:
       containers:
         - name: jenkins
           image: jenkins/jenkins:lts
+          securityContext:
+            privileged: true
+          env:
+            - name: DOCKER_HOST
+              value: "unix:///var/run/docker.sock"
           resources:
             requests:
               memory: "11Gi"
@@ -48,7 +53,12 @@ spec:
           volumeMounts:
             - name: jenkins-data
               mountPath: /var/jenkins_home
+            - name: docker-socket
+              mountPath: /var/run/docker.sock
       volumes:
         - name: jenkins-data
           persistentVolumeClaim:
             claimName: jenkins-pv-claim
+        - name: docker-socket
+          hostPath:
+            path: /var/run/docker.sock
