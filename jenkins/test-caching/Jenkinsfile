@@ -1,5 +1,10 @@
 pipeline {
-    agent { dockerfile true }
+    agent {
+        dockerfile {
+            filename 'Dockerfile'
+            dir 'jenkins/test-caching'
+        }
+    }
 
     stages {
         stage('Build') {
