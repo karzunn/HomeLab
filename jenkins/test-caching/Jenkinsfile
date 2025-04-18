@@ -33,7 +33,7 @@ pipeline {
                 script {
                     def img = docker.build('my-image', 'jenkins/test-caching')
 
-                    img.inside('-v ${env.CACHE_VOLUME}:/cache --user=$(id -u):$(id -g)') {
+                    img.inside("-v ${env.CACHE_VOLUME}:/cache --user='\$(id -u):\$(id -g)'") {
                         echo "📦 Generating dependencies..."
                         sh '''
                             echo "libfoo-1.2.3" > /cache/deps.txt
@@ -50,7 +50,7 @@ pipeline {
                 script {
                     def img = docker.build('my-image', 'jenkins/test-caching')
 
-                    img.inside('-v ${env.CACHE_VOLUME}:/cache --user=$(id -u):$(id -g)') {
+                    img.inside("-v ${env.CACHE_VOLUME}:/cache --user='\$(id -u):\$(id -g)'") {
                         echo "📄 Using cached dependencies:"
                         sh 'cat /cache/deps.txt || echo "⚠️ No deps.txt found!"'
                     }
