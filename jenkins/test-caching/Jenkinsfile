@@ -33,10 +33,9 @@ pipeline {
                 script {
                     def img = docker.build('my-image', 'jenkins/test-caching')
 
-                    img.inside("-v ${env.CACHE_VOLUME}:/cache") {
+                    img.inside("-v ${env.CACHE_VOLUME}:/cache --user=$(id -u):$(id -g)") {
                         echo "📦 Generating dependencies..."
                         sh '''
-                            chown -R $(id -u):$(id -g) /cache
                             echo "libfoo-1.2.3" > /cache/deps.txt
                             echo "libbar-4.5.6" >> /cache/deps.txt
                             echo "✅ Dependencies written to /cache/deps.txt"
