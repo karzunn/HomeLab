@@ -3,7 +3,7 @@ pipeline {
         dockerfile {
             filename 'Dockerfile'
             dir 'jenkins/docker-volume-test/pipeline'
-            args '-v cache_vol:/cache'
+            args '-u 1001:1001 -v cache_vol:/cache'
         }
     }
 
@@ -14,7 +14,6 @@ pipeline {
     stages {
         stage('Write To Cache') {
             steps {
-                sh 'id -u && id -g'
                 sh 'echo 1 >> $CACHE_VOLUME_DIR/ledger.txt'
             }
         }
