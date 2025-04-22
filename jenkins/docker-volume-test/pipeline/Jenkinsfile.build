@@ -3,7 +3,7 @@ pipeline {
         dockerfile {
             filename 'Dockerfile'
             dir 'jenkins/docker-volume-test/pipeline'
-            args '-u 1001:1001 -v cache_vol:/cache'
+            args '-u 0 -v cache_vol:/cache'
         }
     }
 

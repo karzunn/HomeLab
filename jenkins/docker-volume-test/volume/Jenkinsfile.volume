@@ -14,7 +14,7 @@ pipeline {
             steps {
                 sh '''
                     docker volume create cache_vol
-                    docker run --rm -u 1001:1001 -v cache_vol:/cache init-volume-image cp ledger.txt /cache/ledger.txt
+                    docker run --rm -u 0 -v cache_vol:/cache init-volume-image cp ledger.txt /cache/ledger.txt
                 '''
             }
         }
