@@ -1,7 +1,8 @@
 pipeline {
     agent {
-        docker {
-            dockerfile true
+        dockerfile {
+            filename 'Dockerfile'
+            dir 'jenkins/docker-volume-test/pipeline'
             args '-v cache_vol:/cache'
         }
     }
