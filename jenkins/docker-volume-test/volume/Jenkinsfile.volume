@@ -2,11 +2,20 @@ pipeline {
     agent any
 
     stages {
-        stage('Init Volume') {
+        stage('Build Init Image') {
             steps {
                 dir('jenkins/docker-volume-test/volume') {
-                    sh 'docker-compose build init-volume'
+                    sh 'docker build -t init-volume-image .'
                 }
+            }
+        }
+
+        stage('Populate Volume') {
+            steps {
+                sh '''
+                    docker volume create cache_vol
+                    docker run --rm -v cache_vol:/cache init-volume-image cp /app/ledger.txt /cache/ledger.txt
+                '''
             }
         }
     }
