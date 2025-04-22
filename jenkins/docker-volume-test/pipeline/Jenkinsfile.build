@@ -1,0 +1,25 @@
+pipeline {
+    agent {
+        docker {
+            dockerfile true
+            args '-v cache_vol:/cache'
+        }
+    }
+
+    environment {
+        CACHE_VOLUME_DIR = '/cache'
+    }
+
+    stages {
+        stage('Write To Cache') {
+            steps {
+                sh 'echo 1 >> $CACHE_VOLUME_DIR/ledger.txt'
+            }
+        }
+        stage('Read Cache') {
+            steps {
+                sh 'cat $CACHE_VOLUME_DIR/ledger.txt'
+            }
+        }
+    }
+}

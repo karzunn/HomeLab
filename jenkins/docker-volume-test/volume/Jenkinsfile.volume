@@ -1,0 +1,13 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Init Volume') {
+            steps {
+                dir('jenkins/docker-volume-test/volume') {
+                    sh 'docker-compose build init-volume'
+                }
+            }
+        }
+    }
+}

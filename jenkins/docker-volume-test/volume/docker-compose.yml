@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  init-volume:
+    build: .
+    volumes:
+      - cache_vol:/cache
+    command: ["sh", "-c", "cp ledger.txt /cache/ledger.txt"]
+
+volumes:
+  cache_vol:
