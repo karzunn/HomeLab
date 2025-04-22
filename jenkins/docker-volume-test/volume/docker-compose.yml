@@ -5,7 +5,7 @@ services:
     build: .
     volumes:
       - cache_vol:/cache
-    command: ["cp", "ledger.txt", "/cache/ledger.txt"]
+    restart: "no"
 
 volumes:
   cache_vol:

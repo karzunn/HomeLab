@@ -1,3 +1,3 @@
 FROM ubuntu:20.04
 
-RUN touch ledger.txt
+RUN touch cache/ledger.txt
