@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  init-volume:
+    image: .
+    volumes:
+      - cache_vol:/cache
+    command: ["cp", "ledger.txt", "/cache/ledger.txt"]
+
+volumes:
+  cache_vol:
